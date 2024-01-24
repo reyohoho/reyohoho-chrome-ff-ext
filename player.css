@@ -1,0 +1,11 @@
+#watch-kinopoisk-player-tail {
+    width: 32px;
+    height: 128px;
+    top: -128px;
+    left: 8px;
+    outline: none;
+    cursor: pointer;
+    position: fixed;
+    z-index: 8888;
+    transition: top 0.2s ease
+}
