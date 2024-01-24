@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "ReYohoho",
+  "version": "1.0.4",
+  "description": "Open ReYohoho directly from kinopoisk.ru",
+  "icons": {
+    "128": "./icons/icon128.png",
+    "48": "./icons/icon48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.kinopoisk.ru/*"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false,
+      "js": [
+        "./player.js"
+      ],
+      "css": [
+        "player.css"
+      ]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{392ad5c9-19c9-4813-a190-03476ae5762a}"
+    }
+  }
+}
