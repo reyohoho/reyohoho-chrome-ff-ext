@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "ReYohoho",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Open ReYohoho directly from kinopoisk.ru",
   "icons": {
     "128": "./icons/icon128.png",
@@ -26,5 +26,6 @@
     "gecko": {
       "id": "{392ad5c9-19c9-4813-a190-03476ae5762a}"
     }
-  }
+  },
+  "permissions": [ "<all_urls>" ]
 }
