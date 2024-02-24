@@ -1,7 +1,7 @@
 {
   "name": "ReYohoho",
   "description": "Open ReYohoho directly from kinopoisk.ru",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "author": "reyohoho",
   "homepage_url": "https://github.com/reyohoho/reyohoho-chrome-ext",
   "manifest_version": 3,
