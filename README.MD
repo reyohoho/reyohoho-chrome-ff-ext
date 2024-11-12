@@ -12,3 +12,6 @@ https://addons.mozilla.org/ru/firefox/addon/reyohoho/
 
 ## Tampermonkey
 https://raw.githubusercontent.com/reyohoho/reyohoho-chrome-ff-ext/userscript/reyohoho.user.js
+
++Shikimori support
+https://greasyfork.org/ru/scripts/516907-reyohoho-for-shikimori/
