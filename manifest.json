@@ -10,7 +10,7 @@
   ],
 
   "content_scripts": [{
-    "matches": ["https://*.kinopoisk.ru/*"],
+    "matches": ["https://*.kinopoisk.ru/*", "https://*.shikimori.one/*"],
     "js": ["player.js"],
     "css": ["player.css"]
   }],
