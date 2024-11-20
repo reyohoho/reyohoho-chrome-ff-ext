@@ -1,14 +1,10 @@
 {
   "name": "ReYohoho",
-  "description": "Open ReYohoho directly from kinopoisk.ru",
-  "version": "1.0.6",
+  "description": "Open ReYohoho directly from kinopoisk.ru or shikimori.one",
+  "version": "1.0.7",
   "author": "reyohoho",
   "homepage_url": "https://github.com/reyohoho/reyohoho-chrome-ext",
   "manifest_version": 3,
-  "host_permissions": [
-    "*://*.kinopoisk.ru/"
-  ],
-
   "content_scripts": [{
     "matches": ["https://*.kinopoisk.ru/*", "https://*.shikimori.one/*"],
     "js": ["player.js"],
