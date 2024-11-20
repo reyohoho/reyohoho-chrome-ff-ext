@@ -18,11 +18,11 @@ function httpGet() {
             return "https://reyohoho.github.io/reyohoho/#";
         }
     } catch (e) {
-        console.log("reyohoho, error: " + e);
+        console.log(e);
         return "https://reyohoho.github.io/reyohoho/#";
     }
 }
-
+//create Player button
 function mountPlayerTail(movieId) {
     const playerTile = document.createElement('div');
     playerTile.id = playerTailId;
@@ -31,56 +31,77 @@ function mountPlayerTail(movieId) {
     playerTile.addEventListener('click', () => mountPlayer(siteUrl + movieId));
     playerTile.addEventListener('mouseover', () => { playerTile.style.top = '0px' });
     playerTile.addEventListener('mouseout', () => { playerTile.style.top = '-32px' });
-
+    //Without 500 delay, Shikimori's website wasn't working properly when switching between different anime.
     setTimeout(() => {
-        playerTile.style.top = '-32px';
-    }, 100);
-
-    document.body.appendChild(playerTile);
+        document.body.appendChild(playerTile);
+        setTimeout(() => {
+            playerTile.style.top = '-32px';
+        }, 100); 
+    }, 500);
+    
 }
-
+//remove Player button if created
 function removeElement(elementId) {
-    if (document.contains(document.getElementById(elementId))) {
-        document.getElementById(elementId).remove();
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.remove();
     }
 }
-
+//func for https://www.kinopoisk.ru/
 function kinopoiskPageHandler() {
-    const pathname = window.location.pathname.substr(1).split('/');
-    const movieId = pathname[1];
-    const movieType = pathname[0];
-    const isMovieIdNum = /^\d+$/.test(movieId);
+    const [movieType, movieId] = window.location.pathname.substr(1).split('/');
 
-    if (typeof movieId === 'undefined'
-        || typeof movieType === 'undefined'
-        || !isMovieIdNum
-    ) {
-        console.error('Watch kinopoisk wrong movie data');
+    if ((!movieTypes.includes(movieType) || !/^\d+$/.test(movieId)) ) {
+        console.error('Invalid Kinopoisk movie data.');
         removeElement(playerTailId);
-
         return;
     }
+    mountPlayerTail(movieId);
 
-    console.log('Watch kinopoisk movie id: ' + movieId);
-    if (movieTypes.includes(movieType)) {
-        mountPlayerTail(movieId);
-    } else {
+}
+//func for https://shikimori.one/
+function shikimoriPageHandler() {
+    const [movieType, movieIdSlug] = window.location.pathname.substr(1).split('/');
+    const movieId = movieIdSlug?.split('-')[0];
+
+    if (movieType !== 'animes' || !movieId){
+        console.error('Invalid Shikimori movie data.');
         removeElement(playerTailId);
+        return;
     }
+    mountPlayerTail(`shiki${movieId}`);
+
 }
 
-window.addEventListener('load', kinopoiskPageHandler)
+// Initialize on page load
+window.addEventListener('load', () => {
+    if (window.location.href.includes('shikimori.one')) {
+        shikimoriPageHandler();
+    } else {
+        kinopoiskPageHandler();
+    }
+});
+
+
 let prevUrl = undefined;
 setInterval(() => {
   const currUrl = window.location.href;
-  if (currUrl != prevUrl && (currUrl.indexOf('film',)!=-1 || currUrl.indexOf('series')!=-1)) {
+  if (currUrl != prevUrl) {
     prevUrl = currUrl;
-    kinopoiskPageHandler();
+    if (window.location.href.includes('shikimori.one')) {
+        shikimoriPageHandler();
+    } else {
+        kinopoiskPageHandler();
+    }
   }
 }, 1000);
 
 window.addEventListener('popstate',()=>
 {
         history.go();
-        kinopoiskPageHandler();
+        if (location.host.includes('shikimori.one')) {
+            shikimoriPageHandler();
+        } else {
+            kinopoiskPageHandler();
+        }
 })

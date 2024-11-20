@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "ReYohoho",
-  "version": "1.0.6",
-  "description": "Open ReYohoho directly from kinopoisk.ru",
+  "version": "1.0.7",
+  "description": "Open ReYohoho directly from kinopoisk.ru or shikimori.one",
   "icons": {
     "128": "./icons/icon128.png",
     "48": "./icons/icon48.png"
@@ -10,7 +10,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.kinopoisk.ru/*"
+        "https://www.kinopoisk.ru/*",
+        "https://shikimori.one/*"
       ],
       "run_at": "document_idle",
       "all_frames": false,
